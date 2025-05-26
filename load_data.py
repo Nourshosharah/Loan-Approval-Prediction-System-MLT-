@@ -8,7 +8,7 @@ django.setup()
 
 from loans.models import Loans
 df = pd.read_csv("loan_data.csv")
-
+df = df.where(pd.notnull(df), None)
 for index, row in df.iterrows():
     Loans.objects.create(
         loan_id=row['Loan_ID'],
