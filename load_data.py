@@ -7,7 +7,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "loan_project.settings")
 django.setup()
 
 from loans.models import Loans
-df = pd.read_csv("loan_data.csv")
+df = pd.read_csv("loan_prediction")
 df = df.where(pd.notnull(df), None)
 for index, row in df.iterrows():
     Loans.objects.create(
