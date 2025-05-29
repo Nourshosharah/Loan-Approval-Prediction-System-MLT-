@@ -1,6 +1,6 @@
 from django.db import models
 
-class Loans(models.Model):
+class Loan(models.Model):
     GENDER_CHOICES = [('Male', 'Male'), ('Female', 'Female')]
     MARRIED_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
     EDUCATION_CHOICES = [('Graduate', 'Graduate'), ('Not Graduate', 'Not Graduate')]

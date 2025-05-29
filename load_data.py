@@ -6,11 +6,11 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "loan_project.settings")
 django.setup()
 
-from loans.models import Loans
+from loans.models import Loan
 df = pd.read_csv("loan_prediction.csv")
 df = df.where(pd.notnull(df), None)
 for index, row in df.iterrows():
-    Loans.objects.create(
+    Loan.objects.create(
         loan_id=row['Loan_ID'],
         gender=row['Gender'],
         married=row['Married'],
