@@ -1,10 +1,20 @@
 # Create your views here.
-from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 from .models import Loan
-import json
+from .serializers import LoanSerializer
 
+@api_view(['GET', 'POST'])
 def loan_list(request):
-    loans = Loan.objects.all().values()
-    data = list(loans)
-    json_data = json.dumps(data, indent=2)
-    return HttpResponse(json_data, content_type="application/json")
+    if request.method == 'GET':
+        loans = Loan.objects.all()  
+        serializer = LoanSerializer(loans, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = LoanSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()  
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
