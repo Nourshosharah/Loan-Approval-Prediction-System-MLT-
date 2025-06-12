@@ -36,15 +36,15 @@
     "loan_status": "Y"
   }
  ## 2. Loan Detail, Update, and Delete
-** GET /api/loans/<id>/ **
+** GET ** /api/loans/<id>/ 
 Retrieve a loan request by ID.
-PUT /api/loans/<id>/
+ ** PUT  ** /api/loans/<id>/
 Update a loan request by ID.
 Request Body: Same as above for creating loan.
-DELETE /api/loans/<id>/
+ ** DELETE  ** /api/loans/<id>/
 Delete a loan request by ID.
 ## 3. Loan Summary
-** GET /api/loans/summary/ **
+** GET  ** /api/loans/summary/
 Returns statistics about loans:
 {
   "total_loans": 100,
@@ -53,7 +53,7 @@ Returns statistics about loans:
   "avg_applicant_income": 4500.75
 }
 ## 4. Predict Loan Approval
-**POST /api/predict/**
+**POST **  /api/predict/
 Submit loan features to get approval prediction.
 Request Body Example:
 json
