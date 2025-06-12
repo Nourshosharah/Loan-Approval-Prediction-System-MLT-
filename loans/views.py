@@ -26,10 +26,23 @@ def loan_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET','PUT', 'DELETE'])
 def loan_detail(request, id):
     loan = get_object_or_404(Loan, id=id)
-    serializer = LoanSerializer(loan)
-    return Response(serializer.data)
+
+    if request.method == 'GET':
+        serializer = LoanSerializer(loan)
+        return Response(serializer.data)
     
-   
+    elif request.method == 'PUT':
+        serializer = LoanSerializer(loan, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        loan.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+

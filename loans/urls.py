@@ -7,7 +7,7 @@ urlpatterns = [
     path('', home, name='home'), 
     path('api/loans/', loan_list, name='loan_list'),
     path('api/loans/<int:id>/', loan_detail, name='loan_detail'), 
-
+  
 ]
 
 
