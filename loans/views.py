@@ -6,6 +6,7 @@ from .models import Loan
 from .serializers import LoanSerializer
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.db.models import Avg
 
 
 def home(request):
@@ -46,3 +47,16 @@ def loan_detail(request, id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
+@api_view(['GET'])
+def loan_summary(request):
+    approved = Loan.objects.filter(loan_status='Y').count()
+    rejected = Loan.objects.filter(loan_status='N').count()
+    total = Loan.objects.count()
+    avg_income = Loan.objects.aggregate(Avg('applicant_income'))['applicant_income__avg']
+
+    return Response({
+        "total_loans": total,
+        "approved": approved,
+        "rejected": rejected,
+        "avg_applicant_income": avg_income,
+    })
