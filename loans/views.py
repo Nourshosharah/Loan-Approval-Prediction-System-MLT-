@@ -72,6 +72,7 @@ model = joblib.load(model_path)
 def predict_loan(request):
     try:
         data = request.data
+        
     
         features = np.array([[
             data['gender'],
