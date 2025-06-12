@@ -7,6 +7,9 @@ from .serializers import LoanSerializer
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.db.models import Avg
+import joblib
+import numpy as np
+import os
 
 
 def home(request):
@@ -60,3 +63,34 @@ def loan_summary(request):
         "rejected": rejected,
         "avg_applicant_income": avg_income,
     })
+
+
+model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
+model = joblib.load(model_path)
+
+@api_view(['POST'])
+def predict_loan(request):
+    try:
+        data = request.data
+    
+        features = np.array([[
+            data['gender'],
+            data['married'],
+            data['dependents'],
+            data['education'],
+            data['self_employed'],
+            data['applicant_income'],
+            data['coapplicant_income'],
+            data['loan_amount'],
+            data['loan_amount_term'],
+            data['credit_history'],
+            data['property_area']
+        ]])
+
+        prediction = model.predict(features)[0]
+        result = "Approved" if prediction == "Y" else "Rejected"
+        return Response({"prediction": result})
+    
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
