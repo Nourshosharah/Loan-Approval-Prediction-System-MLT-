@@ -5,7 +5,7 @@ from rest_framework import status
 from .models import Loan
 from .serializers import LoanSerializer
 from django.http import HttpResponse
-
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -26,4 +26,10 @@ def loan_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+@api_view(['GET'])
+def loan_detail(request, id):
+    loan = get_object_or_404(Loan, id=id)
+    serializer = LoanSerializer(loan)
+    return Response(serializer.data)
+    
+   
