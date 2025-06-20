@@ -9,6 +9,9 @@ urlpatterns = [
     path('api/loans/<int:id>/', loan_detail, name='loan_detail'), 
     path('api/loans/summary/', loan_summary, name='loan_summary'),
     path('api/predict/', predict_loan, name='predict_loan'),
+
+
+
 ]
 
   

@@ -12,6 +12,7 @@ import numpy as np
 import os
 
 
+
 def home(request):
     return HttpResponse("<h2>Welcome to the Loan API </h2><p>Go to <a href='/api/loans/'>/api/loans/</a> to see all loans.</p>")
 
@@ -65,33 +66,54 @@ def loan_summary(request):
     })
 
 
-model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
+model_path = os.path.join(os.path.dirname(__file__), 'DecisionTree_mode.pkl')
 model = joblib.load(model_path)
 
 @api_view(['POST'])
 def predict_loan(request):
     try:
         data = request.data
-        
-    
+
+        total_income = float(data['applicant_income']) + float(data['coapplicant_income'])
+        loan_amount = float(data['loan_amount'])
+        loan_term_months = float(data['loan_amount_term'])
+        monthly_payment = loan_amount / loan_term_months if loan_term_months else 0
+
+        gender_male = 1 if data['gender'].lower() == 'male' else 0
+        married_yes = 1 if data['married'].lower() == 'yes' else 0
+
+        dependents_1 = 1 if data['dependents'] == '1' else 0
+        dependents_2 = 1 if data['dependents'] == '2' else 0
+        dependents_3plus = 1 if data['dependents'] in ['3', '3+'] else 0
+
+        education_not_grad = 1 if data['education'].lower() == 'not graduate' else 0
+        self_employed_yes = 1 if data['self_employed'].lower() == 'yes' else 0
+
+        property_area_semiurban = 1 if data['property_area'].lower() == 'semiurban' else 0
+        property_area_urban = 1 if data['property_area'].lower() == 'urban' else 0
+  
+
+        credit_history = int(data['credit_history'])  
+
+
         features = np.array([[
-            data['gender'],
-            data['married'],
-            data['dependents'],
-            data['education'],
-            data['self_employed'],
-            data['applicant_income'],
-            data['coapplicant_income'],
-            data['loan_amount'],
-            data['loan_amount_term'],
-            data['credit_history'],
-            data['property_area']
+            credit_history,
+            gender_male,
+            married_yes,
+            dependents_1,
+            dependents_2,
+            dependents_3plus,
+            education_not_grad,
+            self_employed_yes,
+            property_area_semiurban,
+            property_area_urban,
+            total_income,
+            monthly_payment
         ]])
 
         prediction = model.predict(features)[0]
         result = "Approved" if prediction == "Y" else "Rejected"
         return Response({"prediction": result})
-    
+
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
