@@ -4,6 +4,8 @@ import DashboardPage from "../../pages/dashboard";
 import LoginPage from "../../pages/login";
 import ProtectedRoute from "../ProtectedRoutes";
 import SignUpPage from "../../pages/signup";
+import RequestsPage from "../../pages/requests";
+import ModelAccuracy from "../../pages/modelAccuracy";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <DashboardPage />,
+          },
+          {
+            path: "requests",
+            element: <RequestsPage />,
+          },
+          {
+            path: "modelaccuracy",
+            element: <ModelAccuracy />,
           },
         ],
       },
