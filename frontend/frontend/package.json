@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/charts": "^2.4.0",
     "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.25.4",
+    "axios": "^1.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-intl": "^7.1.11",
