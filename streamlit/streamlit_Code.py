@@ -48,7 +48,7 @@ import pickle
 st.sidebar.title("Loan Streamlit App")
 page = st.sidebar.radio(
     "Go to",
-    ["🏠 Home", "📋 Loan List", "📌 Loan Detail", "📊 Loan Summary", "🔮 Predict Loan Status"]
+        ["🏠 Home", "📋 Loan List", "📌 Loan Detail", "📊 Loan Summary", "🔮 Predict Loan Status", "📈 Classification Report"]
 )
 
 if page == "🏠 Home":
