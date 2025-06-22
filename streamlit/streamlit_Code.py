@@ -34,16 +34,15 @@ def preprocess_cols(df,featuers,caps):
 
 DATA_PATH = "data/loan_prediction.csv"
 if os.path.exists(DATA_PATH):
+    DATA_PATH = os.path.join(os.path.dirname(__file__), "data","loan_prediction.csv")
     loans_df = pd.read_csv(DATA_PATH)
 else:
     loans_df = pd.DataFrame(columns=['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
                             )
-
-model = joblib.load("models/DecisionTree_mode.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "DecisionTree_mode.pkl")
+model = joblib.load(MODEL_PATH)
 import pickle
 
-# with open(r"C:\Users\Nour Shosharah\DecisionTree_mode.pkl", 'rb') as f:
-#     model = pickle.load(f)
 
 st.sidebar.title("Loan Streamlit App")
 page = st.sidebar.radio(
@@ -206,7 +205,9 @@ elif page == "📊 Loan Summary":
         ax.set_title(f"Boxplot for {col} (Capped)")
         st.pyplot(fig)
     st.subheader("Correlation with Loan_Status")
-    st.image("images/correlation_heatmap.png", caption="Feature Correlation", use_column_width=True)
+    IMAGE_PATH = os.path.join(os.path.dirname(__file__), "images", "correlation_heatmap.png")
+
+    st.image(IMAGE_PATH, caption="Feature Correlation", use_column_width=True)
 
 
     st.write("✅ EDA Completed")
