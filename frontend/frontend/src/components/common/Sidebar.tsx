@@ -5,12 +5,21 @@ import type { MenuProps } from "antd";
 interface SidebarProps {
   collapsed: boolean;
 }
-
 const items: MenuProps["items"] = [
   {
-    key: "/",
+    key: "",
     icon: <i className="ri-dashboard-line" />,
     label: "Dashboard",
+  },
+  {
+    key: "requests",
+    icon: <i className="ri-dashboard-line" />,
+    label: "Requests",
+  },
+  {
+    key: "modelaccuracy",
+    icon: <i className="ri-dashboard-line" />,
+    label: "Model Accuracy",
   },
 ];
 
