@@ -32,14 +32,14 @@ def preprocess_cols(df,featuers,caps):
     return df_final 
 
 
-DATA_PATH = "loan_prediction.csv"
+DATA_PATH = "data/loan_prediction.csv"
 if os.path.exists(DATA_PATH):
     loans_df = pd.read_csv(DATA_PATH)
 else:
     loans_df = pd.DataFrame(columns=['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
                             )
 
-model = joblib.load("DecisionTree_mode.pkl")
+model = joblib.load("models/DecisionTree_mode.pkl")
 import pickle
 
 # with open(r"C:\Users\Nour Shosharah\DecisionTree_mode.pkl", 'rb') as f:
@@ -206,7 +206,7 @@ elif page == "📊 Loan Summary":
         ax.set_title(f"Boxplot for {col} (Capped)")
         st.pyplot(fig)
     st.subheader("Correlation with Loan_Status")
-    st.image("correlation_heatmap.png", caption="Feature Correlation", use_column_width=True)
+    st.image("images/correlation_heatmap.png", caption="Feature Correlation", use_column_width=True)
 
 
     st.write("✅ EDA Completed")
