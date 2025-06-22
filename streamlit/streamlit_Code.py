@@ -30,16 +30,16 @@ def preprocess_cols(df,featuers,caps):
     df_final = df_final.reindex(columns=featuers, fill_value=False)
 
     return df_final 
+BASE_DIR = os.path.dirname(__file__)
 
 
-DATA_PATH = "data/loan_prediction.csv"
 if os.path.exists(DATA_PATH):
-    DATA_PATH = os.path.join(os.path.dirname(__file__), "data","loan_prediction.csv")
+    DATA_PATH = os.path.join(BASE_DIR, "data", "loan_prediction.csv")
     loans_df = pd.read_csv(DATA_PATH)
 else:
     loans_df = pd.DataFrame(columns=['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
                             )
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "DecisionTree_mode.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "models", "DecisionTree_mode.pkl")
 model = joblib.load(MODEL_PATH)
 import pickle
 
@@ -205,8 +205,7 @@ elif page == "📊 Loan Summary":
         ax.set_title(f"Boxplot for {col} (Capped)")
         st.pyplot(fig)
     st.subheader("Correlation with Loan_Status")
-    IMAGE_PATH = os.path.join(os.path.dirname(__file__), "images", "correlation_heatmap.png")
-
+    IMAGE_PATH = os.path.join(BASE_DIR, "images", "correlation_heatmap.png")
     st.image(IMAGE_PATH, caption="Feature Correlation", use_column_width=True)
 
 
