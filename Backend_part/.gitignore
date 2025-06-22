@@ -1,0 +1,15 @@
+
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+venv/
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+media
+
+
