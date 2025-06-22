@@ -1,5 +1,5 @@
 # Loan Approval API Backend
-Django + REST + Scikit-learn
+Django , Django REST Framework , Scikit-learn
 
 # Endpoints
 
