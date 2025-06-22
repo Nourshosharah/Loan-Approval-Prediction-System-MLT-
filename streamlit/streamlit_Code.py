@@ -213,6 +213,25 @@ elif page == "📊 Loan Summary":
     st.write("✅ EDA Completed")
 
 
+elif page == "📈 Classification Report":
+    st.title("Model Classification Report 📊")
+
+    # Load your image
+    image_path_c_r = os.path.join(BASE_DIR, "images", "classification_report.png")
+    if os.path.exists(image_path_c_r):
+        st.image(image_path_c_r, caption="Classification Report Heatmap", use_column_width=True)
+    else:
+        st.warning("Classification report image not found. Please make sure it is in the 'images/' folder.")
+
+    # Some descriptive details
+    st.markdown("""
+    ### 📌 Details:
+    - **True** class means the loan was approved.
+    - **False** class means the loan was rejected.
+    - The classification report shows how well the model distinguishes approvals vs rejections.
+    - Higher precision and recall for the **True** class indicate fewer missed approvals.
+    - Always monitor these metrics to ensure fair decisions.
+    """)
 elif page == "🔮 Predict Loan Status":
     st.title("Predict Loan Approval")
 
