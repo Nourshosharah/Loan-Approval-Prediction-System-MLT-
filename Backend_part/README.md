@@ -1,5 +1,5 @@
 # Loan Approval API Backend
-
+Django + REST + Scikit-learn
 
 # Endpoints
 
@@ -60,22 +60,33 @@ json
 Copy
 Edit
 {
-  "gender": 1,
-  "married": 1,
-  "dependents": 0,
-  "education": 0,
-  "self_employed": 0,
-  "applicant_income": 5000,
-  "coapplicant_income": 0,
-  "loan_amount": 150,
-  "loan_amount_term": 360,
-  "credit_history": 1,
-  "property_area": 2
+  "Credit_History",
+  "Gender_Male",
+  "Married_Yes",
+  "Dependents_1",
+  "Dependents_2",
+  "Dependents_3+",
+  "Education_Not Graduate",
+  "Self_Employed_Yes",
+  "Property_Area_Semiurban",
+  "Property_Area_Urban",
+  "Total_income",
+  "month_payment",
+]
 }
 Response Example:
 {
-  "prediction": "Approved"
+  "prediction": true,
+  "probability": {
+    "Rejected": 0.2,
+    "Accepted": 0.8
+  }
 }
+
+CORS
+All origins are allowed by default (CORS_ALLOW_ALL_ORIGINS = True), enabling frontend communication easily.
+
+
 #  Notes:
 Some fields (like gender, married, education, etc.) might be represented as integers internally; frontend should map these accordingly.
 The ML model file (model.pkl) must be located alongside the views.py file.
