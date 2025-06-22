@@ -87,9 +87,4 @@ CORS
 All origins are allowed by default (CORS_ALLOW_ALL_ORIGINS = True), enabling frontend communication easily.
 
 
-#  Notes:
-Some fields (like gender, married, education, etc.) might be represented as integers internally; frontend should map these accordingly.
-The ML model file (model.pkl) must be located alongside the views.py file.
-Handle missing or invalid data carefully before prediction.
-All data exchange is via JSON.
-  
+
