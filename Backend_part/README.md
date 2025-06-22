@@ -72,7 +72,7 @@ Edit
   "Property_Area_Urban",
   "Total_income",
   "month_payment",
-]
+
 }
 Response Example:
 {
