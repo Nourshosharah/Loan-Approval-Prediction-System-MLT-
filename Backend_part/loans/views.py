@@ -2,7 +2,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Loan
 from .serializers import LoanSerializer
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import get_object_or_404
