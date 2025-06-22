@@ -31,10 +31,11 @@ def preprocess_cols(df,featuers,caps):
 
     return df_final 
 BASE_DIR = os.path.dirname(__file__)
+DATA_PATH = os.path.join(BASE_DIR, "data", "loan_prediction.csv")
 
 
 if os.path.exists(DATA_PATH):
-    DATA_PATH = os.path.join(BASE_DIR, "data", "loan_prediction.csv")
+    
     loans_df = pd.read_csv(DATA_PATH)
 else:
     loans_df = pd.DataFrame(columns=['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
